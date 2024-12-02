@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
+import { openai } from "./openai";
 
 /**
  * Recursively searches for a file in a directory and its subdirectories.
@@ -96,7 +97,7 @@ async function summarizeFileExcerpts(
   console.log("Summarization Prompt:", summarizationPrompt);
 
   // Call the OpenAI API to get the summary
-  const summaryResponse = await openai.beta.chat.completions.create({
+  const summaryResponse = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [{ role: "user", content: summarizationPrompt }],
   });
