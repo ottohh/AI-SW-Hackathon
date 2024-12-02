@@ -3,7 +3,7 @@ import { dataProduct } from '$lib/server/db/schema';
 import * as fs from 'fs/promises';
 import path from 'path';
 import { eq } from 'drizzle-orm';
-import { processZipFile } from '../server/GPT/start';
+import { processZipFile } from '../../server/GPT/start';
 
 export const actions = {
   upload: async ({ request }) => {
