@@ -1,27 +1,18 @@
-# sv
+# AgriMarket
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+AgriMarket is an agriculture data marketplace that follows Dublin Core standards.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), you can start a development server:
 
 ```bash
 npm run dev
+```
 
-# or start the server and open the app in a new browser tab
+To start the server and open the app in a new browser tab:
+
+```bash
 npm run dev -- --open
 ```
 
@@ -33,6 +24,50 @@ To create a production version of your app:
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+You can preview the production build with:
+
+```bash
+npm run preview
+```
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Database Management
+
+To start the database:
+
+```bash
+npm run db:start
+```
+
+To push database changes:
+
+```bash
+npm run db:push
+```
+
+To run database migrations:
+
+```bash
+npm run db:migrate
+```
+
+To open the database studio:
+
+```bash
+npm run db:studio
+```
+
+## Checking
+
+To run type checks:
+
+```bash
+npm run check
+```
+
+To run type checks in watch mode:
+
+```bash
+npm run check:watch
+```
