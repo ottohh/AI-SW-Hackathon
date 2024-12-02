@@ -66,4 +66,4 @@ const mainTest = async () => {
   const data = await processZipFile(zipPath);
 };
 
-mainTest();
+// mainTest();
