@@ -1,6 +1,6 @@
 import { zodResponseFormat } from "openai/helpers/zod";
 import type { z } from "zod";
-import { generateFileExcerpt } from "./excerpt";
+import { generateFileExcerpt, summarizeFileExcerpts } from "./excerpt";
 import type { FilesOfInterestSchema } from "./filesOfInterest";
 import { openai } from "./openai";
 import { dublinCoreSchema, type DublinCoreMetadata } from "./schema";
@@ -19,7 +19,11 @@ export async function _generateDCMIMetadata(
   dirStructure: string,
   id: string
 ): Promise<DublinCoreMetadata> {
-  let fileExcerpts = "";
+  let fileExcerpts: {
+    file: string;
+    excerpt: string;
+    reason: string;
+  }[] = [];
 
   for (const file of filesOfInterest) {
     try {
@@ -30,7 +34,11 @@ export async function _generateDCMIMetadata(
         continue;
       }
 
-      fileExcerpts += `File: ${excerpt.filePath}\nExcerpt: ${excerpt.excerpt}\nReason: ${file.reason}\n\n`;
+      fileExcerpts.push({
+        file: excerpt.filePath,
+        excerpt: excerpt.excerpt,
+        reason: file.reason,
+      });
     } catch (error) {
       console.error(
         `An error occurred while generating an excerpt for file: ${file.file}`,
@@ -40,6 +48,8 @@ export async function _generateDCMIMetadata(
     }
   }
 
+  const summaryOrFilesKeyInfo = await summarizeFileExcerpts(fileExcerpts);
+
   const prompt = `
 Based on the previously identified files of interest, here is the directory structure along with the first 400 characters of each relevant file's content:
   
@@ -48,6 +58,9 @@ ${dirStructure}
 
 Files of Interest:
 ${fileExcerpts}
+
+Summary:
+${summaryOrFilesKeyInfo}
   
 Using this information, generate Dublin Core Metadata Initiative (DCMI) metadata for this dataset. Ensure that each metadata element accurately reflects the content and context of the files. Use MIME types for the dc:format If certain metadata elements cannot be determined from the provided information, please indicate them as "Not Available."
 

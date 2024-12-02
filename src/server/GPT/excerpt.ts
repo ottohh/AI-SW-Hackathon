@@ -68,7 +68,7 @@ export async function generateFileExcerpt(dirPath: string, filePath: string) {
   return { filePath: foundFilePath, excerpt };
 }
 
-async function summarizeFileExcerpts(
+export async function summarizeFileExcerpts(
   excerptObjects: {
     file: string;
     excerpt: string;
