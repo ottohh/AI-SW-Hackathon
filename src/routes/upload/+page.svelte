@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+
   let fileName = ''; // Variable to hold the file name
 
   function handleFileChange(event: any) {
@@ -12,6 +14,11 @@
 </script>
 
 <div class="flex flex-col" style="margin-top:5%;">
+  <button
+    onclick={() => {
+      goto('/home');
+    }}>Home</button
+  >
   <div>
     <h1
       class="flex flex-column items-center justify-center w-full my-2 text-6xl"
@@ -57,7 +64,7 @@
             id="dropzone-file"
             type="file"
             class="hidden"
-            on:change={handleFileChange}
+            onchange={handleFileChange}
           />
         </label>
       </div>
