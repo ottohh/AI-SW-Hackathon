@@ -10,8 +10,9 @@
   <button
     onclick={() => {
       goto('/upload');
-    }}>Upload data sets</button
-  >
+    }}
+    >Upload dataset
+  </button>
   <div class="flex items-center justify-center w-full">
     <h1
       class="flex flex-column items-center justify-center my-2 text-6xl"

@@ -9,20 +9,29 @@
 </script>
 
 <main>
-  <button
-    onclick={() => {
-      goto('/home');
-    }}>Home</button
-  >
-  <h1>{metadata.title}</h1>
-  <p>{metadata.description}</p>
-  <div class="flex flex-col">
-    {#each Object.entries(metadata) as [key, value]}
-      <div class="grid grid-cols-3">
-        <strong>{key}:</strong>
+  <div>
+    <button
+      onclick={() => {
+        goto('/home/' + data.id + '/edit');
+      }}>Edit</button
+    >
+    <button
+      onclick={() => {
+        goto('/home');
+      }}>Home</button
+    >
+  </div>
+  <div class="flex w-full justify-center flex-col">
+    <h1 class="text-5xl font-bold">{metadata.title}</h1>
+    <p class="max-w-96">{metadata.description}</p>
+    <div class="flex flex-col">
+      {#each Object.entries(metadata) as [key, value]}
+        <div class="grid grid-cols-3">
+          <strong>{key}:</strong>
 
-        <p class=" col-span-2">{value}</p>
-      </div>
-    {/each}
+          <p class=" col-span-2">{value}</p>
+        </div>
+      {/each}
+    </div>
   </div>
 </main>
