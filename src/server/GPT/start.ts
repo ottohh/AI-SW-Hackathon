@@ -19,7 +19,10 @@ export async function processZipFile(zipFilePath: string, id?: string) {
   try {
     // Ensure the output directory exists and create a unique subdirectory
     const outputId = Math.random().toString(36).substring(7);
-    let outputDir = path.join(__dirname, "..", "data", "output");
+    // let outputDir = path.join(__dirname, "..", "data", "output");
+
+    // same but without __dirname
+    let outputDir = path.join("data", "output");
     outputDir = path.join(outputDir, outputId);
     await fs.mkdir(outputDir, { recursive: true });
 
