@@ -3,6 +3,7 @@ import { dataProduct } from '$lib/server/db/schema';
 import * as fs from 'fs/promises';
 import path from 'path';
 import { eq } from 'drizzle-orm';
+import { processZipFile } from '../server/GPT/start';
 
 export const actions = {
   upload: async ({ request }) => {
@@ -30,12 +31,11 @@ export const actions = {
 
     if (!product) return { success: false };
 
-    // TODO call backend to generate metadata
+    console.log(product.zipPath);
 
-    const metadata = {
-      data: 'cool data',
-      name: 'cool name',
-    };
+    const metadata = await processZipFile(product.zipPath);
+
+    console.log('Metadata:', metadata);
 
     await db
       .update(dataProduct)
