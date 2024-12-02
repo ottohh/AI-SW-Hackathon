@@ -1,0 +1,218 @@
+{
+  "bounds": [
+    649796,
+    6745718,
+    136,
+    649874,
+    6745796,
+    214
+  ],
+  "boundsConforming": [
+    649799.0,
+    6745719.0,
+    159.0,
+    649871.0,
+    6745795.0,
+    192.0
+  ],
+  "dataType": "laszip",
+  "hierarchyType": "json",
+  "points": 628062,
+  "schema": [
+    {
+      "count": 628062,
+      "maximum": 649870.281,
+      "mean": 649833.9522430805,
+      "minimum": 649799.293,
+      "name": "X",
+      "offset": 649835,
+      "scale": 0.001,
+      "size": 4,
+      "stddev": 15.083739117232543,
+      "type": "signed",
+      "variance": 227.51918575673116
+    },
+    {
+      "count": 628062,
+      "maximum": 6745794.283,
+      "mean": 6745753.473826408,
+      "minimum": 6745719.395,
+      "name": "Y",
+      "offset": 6745757,
+      "scale": 0.001,
+      "size": 4,
+      "stddev": 16.90436799845649,
+      "type": "signed",
+      "variance": 285.7576574272399
+    },
+    {
+      "count": 628062,
+      "maximum": 191.398,
+      "mean": 180.30540661431726,
+      "minimum": 159.346,
+      "name": "Z",
+      "offset": 175,
+      "scale": 0.001,
+      "size": 4,
+      "stddev": 2.9880112898065407,
+      "type": "signed",
+      "variance": 8.928211468011348
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "Intensity",
+      "size": 2,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 1,
+      "mean": 1,
+      "minimum": 1,
+      "name": "ReturnNumber",
+      "size": 1,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 1,
+      "mean": 1,
+      "minimum": 1,
+      "name": "NumberOfReturns",
+      "size": 1,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "ScanDirectionFlag",
+      "size": 1,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "EdgeOfFlightLine",
+      "size": 1,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "counts": [
+        {
+          "count": 628062,
+          "value": 0
+        }
+      ],
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "Classification",
+      "size": 1,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "ScanAngleRank",
+      "size": 4,
+      "stddev": 0,
+      "type": "float",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 8,
+      "mean": 4.562645089179178,
+      "minimum": 2,
+      "name": "UserData",
+      "size": 1,
+      "stddev": 2.2273656775998214,
+      "type": "unsigned",
+      "variance": 4.9611578617497125
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "PointSourceId",
+      "size": 2,
+      "stddev": 0,
+      "type": "unsigned",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 0,
+      "mean": 0,
+      "minimum": 0,
+      "name": "GpsTime",
+      "size": 8,
+      "stddev": 0,
+      "type": "float",
+      "variance": 0
+    },
+    {
+      "count": 628062,
+      "maximum": 255,
+      "mean": 98.37001920192844,
+      "minimum": 0,
+      "name": "Red",
+      "size": 2,
+      "stddev": 48.25482477518251,
+      "type": "unsigned",
+      "variance": 2328.5281140835677
+    },
+    {
+      "count": 628062,
+      "maximum": 254,
+      "mean": 96.42579872687767,
+      "minimum": 0,
+      "name": "Green",
+      "size": 2,
+      "stddev": 42.43986458732224,
+      "type": "unsigned",
+      "variance": 1801.1421061902483
+    },
+    {
+      "count": 628062,
+      "maximum": 252,
+      "mean": 66.48425792358061,
+      "minimum": 0,
+      "name": "Blue",
+      "size": 2,
+      "stddev": 41.66503302250841,
+      "type": "unsigned",
+      "variance": 1735.9749767667165
+    }
+  ],
+  "span": 128,
+  "srs": {
+    "authority": "EPSG",
+    "horizontal": "32634",
+    "wkt": "PROJCS[\"WGS 84 / UTM zone 34N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",21],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32634\"]]"
+  },
+  "version": "1.1.0"
+}
