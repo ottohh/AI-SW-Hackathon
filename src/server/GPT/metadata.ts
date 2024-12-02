@@ -10,12 +10,14 @@ import { dublinCoreSchema, type DublinCoreMetadata } from "./schema";
  * @param dirPath - The relative path to the directory.
  * @param filesOfInterest - List of files of interest with reasons.
  * @param dirStructure - The directory structure as a string.
+ * @param id - The ID of the dataset.
  * @returns The generated DCMI metadata.
  */
 export async function _generateDCMIMetadata(
   dirPath: string,
   filesOfInterest: z.infer<typeof FilesOfInterestSchema>,
-  dirStructure: string
+  dirStructure: string,
+  id: string
 ): Promise<DublinCoreMetadata> {
   let fileExcerpts = "";
 
@@ -47,8 +49,10 @@ ${dirStructure}
 Files of Interest:
 ${fileExcerpts}
   
-Using this information, generate Dublin Core Metadata Initiative (DCMI) metadata for this dataset. Ensure that each metadata element accurately reflects the content and context of the files. If certain metadata elements cannot be determined from the provided information, please indicate them as "Not Available."
-  `;
+Using this information, generate Dublin Core Metadata Initiative (DCMI) metadata for this dataset. Ensure that each metadata element accurately reflects the content and context of the files. Use MIME types for the dc:format If certain metadata elements cannot be determined from the provided information, please indicate them as "Not Available."
+
+dc:identifier: ${id}
+`;
 
   console.log("Prompt:", prompt);
 

@@ -28,10 +28,12 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.10.1",
     "drizzle-orm": "^0.33.0",
-    "postgres": "^3.4.4",
+    "fs-extra": "^11.2.0",
     "openai": "^4.73.1",
+    "postgres": "^3.4.4",
     "zod": "^3.23.8"
   }
 }

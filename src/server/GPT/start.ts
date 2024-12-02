@@ -15,7 +15,7 @@ const execPromise = promisify(exec);
  * @param outputDir - The directory where the ZIP contents will be extracted.
  * @returns The generated DCMI metadata.
  */
-async function processZipFile(zipFilePath: string) {
+async function processZipFile(zipFilePath: string, id?: string) {
   try {
     // Ensure the output directory exists and create a unique subdirectory
     const outputId = Math.random().toString(36).substring(7);
@@ -44,7 +44,8 @@ async function processZipFile(zipFilePath: string) {
     const dcmiMetadata = await generateDCMIMetadata(
       outputDir,
       filesOfInterest,
-      directoryStructure
+      directoryStructure,
+      id || ""
     );
     console.log("Generated DCMI Metadata:", dcmiMetadata);
 
