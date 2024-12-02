@@ -1,7 +1,6 @@
-import fs from "fs/promises";
 import { zodResponseFormat } from "openai/helpers/zod";
-import path from "path";
 import type { z } from "zod";
+import { generateFileExcerpt } from "./excerpt";
 import type { FilesOfInterestSchema } from "./filesOfInterest";
 import { openai } from "./openai";
 import { dublinCoreSchema, type DublinCoreMetadata } from "./schema";
@@ -21,33 +20,22 @@ export async function _generateDCMIMetadata(
   let fileExcerpts = "";
 
   for (const file of filesOfInterest) {
-    const filePath = path.join(dirPath, file.file);
-
-    // If the file doesn't exist, skip it
     try {
-      await fs.access(filePath);
+      const excerpt = await generateFileExcerpt(dirPath, file.file);
+
+      if (!excerpt) {
+        console.log(`Error generating excerpt for file: ${file.file}`);
+        continue;
+      }
+
+      fileExcerpts += `File: ${excerpt.filePath}\nExcerpt: ${excerpt.excerpt}\nReason: ${file.reason}\n\n`;
     } catch (error) {
-      console.log(`File not found: ${filePath}`);
+      console.error(
+        `An error occurred while generating an excerpt for file: ${file.file}`,
+        error
+      );
       continue;
     }
-
-    console.log(`Reading file: ${filePath}`);
-    const content = await fs.readFile(filePath, "utf-8");
-
-    // Ascii only
-    // Replace all whitespace with a single space
-    const clearedContent = content
-      .replace(/[^\x00-\x7F]/g, "")
-      .replace(/\s+/g, " ");
-
-    // Take 1000 characters or less
-    const EXCERPT_LENGTH = 1000;
-    const excerpt =
-      clearedContent.length > EXCERPT_LENGTH
-        ? clearedContent.substring(0, EXCERPT_LENGTH)
-        : clearedContent;
-
-    fileExcerpts += `File: ${file.file}\nExcerpt:\n${excerpt}\nReason: ${file.reason}\n\n`;
   }
 
   const prompt = `
