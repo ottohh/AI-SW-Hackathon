@@ -1,7 +1,10 @@
 import { zodResponseFormat } from "openai/helpers/zod";
 import type { z } from "zod";
 import { generateFileExcerpt, summarizeFileExcerpts } from "./excerpt";
-import type { FilesOfInterestSchema } from "./filesOfInterest";
+import {
+  allExtensionInDir,
+  type FilesOfInterestSchema,
+} from "./filesOfInterest";
 import { openai } from "./openai";
 import { dublinCoreSchema, type DublinCoreMetadata } from "./schema";
 
@@ -50,14 +53,16 @@ export async function _generateDCMIMetadata(
 
   const summaryOrFilesKeyInfo = await summarizeFileExcerpts(fileExcerpts);
 
+  const extensions = await allExtensionInDir(dirPath);
+
   const prompt = `
 Based on the previously identified files of interest, here is the directory structure along with the first 400 characters of each relevant file's content:
   
 Directory Structure:
 ${dirStructure}
 
-Files of Interest:
-${fileExcerpts}
+All file extensions:
+${extensions.join(", ")}
 
 Summary:
 ${summaryOrFilesKeyInfo}

@@ -3,40 +3,39 @@ import path from "path";
 import { openai } from "./openai";
 
 /**
- * Recursively searches for a file in a directory and its subdirectories.
- * If the filePath includes directory components, it will navigate through those directories.
+ * Finds a file in the directory tree that ends with the given relative path.
  * @param baseDir - The base directory to start the search.
- * @param relativePath - The relative path of the target file, potentially with nested directories.
- * @returns The full path of the file if found; otherwise, null.
+ * @param relativePath - The relative path to search for.
+ * @returns The full path to the file if found; otherwise, null.
  */
-async function findFileRecursively(
-  baseDir: string,
-  relativePath: string
-): Promise<string | null> {
-  const segments = relativePath.split(path.sep); // Split the relative path into segments
-  const currentSegment = segments.shift(); // Get the first segment
+async function findFileByRelativePath(baseDir: string, relativePath: string) {
+  let foundFile: string | null = null;
 
-  if (!currentSegment) {
-    return null; // No segments left, end of recursion
-  }
+  const normalizedRelativePath = path.normalize(relativePath);
 
-  const currentPath = path.join(baseDir, currentSegment);
-
-  // Check if the current segment is a directory
-  if (await fs.pathExists(currentPath)) {
-    const stats = await fs.stat(currentPath);
-
-    if (stats.isDirectory()) {
-      // Recurse into the directory with the remaining path segments
-      return await findFileRecursively(currentPath, segments.join(path.sep));
-    } else if (stats.isFile() && segments.length === 0) {
-      // File found, and there are no more path segments
-      return currentPath;
+  async function searchDir(currentDir: string) {
+    const entries = await fs.readdir(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const entryPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        await searchDir(entryPath);
+        if (foundFile) {
+          return;
+        }
+      } else if (entry.isFile()) {
+        const relPath = path.relative(baseDir, entryPath);
+        const normalizedRelPath = path.normalize(relPath);
+        if (normalizedRelPath.endsWith(normalizedRelativePath)) {
+          foundFile = entryPath;
+          return;
+        }
+      }
     }
   }
 
-  // If the current path does not exist or is not a match, return null
-  return null;
+  await searchDir(baseDir);
+
+  return foundFile;
 }
 
 /**
@@ -46,7 +45,7 @@ async function findFileRecursively(
  * @returns An object containing the file path, its excerpt, and the reason, or null if the file is not found.
  */
 export async function generateFileExcerpt(dirPath: string, filePath: string) {
-  const foundFilePath = await findFileRecursively(dirPath, filePath);
+  const foundFilePath = await findFileByRelativePath(dirPath, filePath);
 
   if (!foundFilePath) {
     console.log(`File not found: ${filePath}`);

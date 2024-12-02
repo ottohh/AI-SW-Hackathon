@@ -1,3 +1,4 @@
+import fs from "fs-extra";
 import { zodResponseFormat } from "openai/helpers/zod";
 import { z } from "zod";
 import { openai } from "./openai";
@@ -50,3 +51,24 @@ export async function identifyFilesOfInterest(
 
   return response.parsed?.files_of_interest || [];
 }
+
+// Iterate all the files in directory recursively in directory and make list of all extensions
+export const allExtensionInDir = async (directory: string) => {
+  const files = await fs.readdir(directory);
+  let extensions: string[] = [];
+  for (const file of files) {
+    const filePath = `${directory}/${file}`;
+    const stat = await fs.stat(filePath);
+    if (stat.isDirectory()) {
+      extensions = [...extensions, ...(await allExtensionInDir(filePath))];
+    } else {
+      const ext = file.split(".").pop();
+      if (ext) {
+        extensions.push(ext);
+      }
+    }
+  }
+
+  // Remove duplicates
+  return [...new Set(extensions)];
+};
