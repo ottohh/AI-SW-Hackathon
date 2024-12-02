@@ -1,9 +1,9 @@
 import { db } from '$lib/server/db';
 import { dataProduct } from '$lib/server/db/schema';
-import type { ServerLoad } from '@sveltejs/kit';
+import type { Load } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 
-export const load: ServerLoad = async ({ params }) => {
+export const load: Load = async ({ params }) => {
   const { id } = params;
 
   if (!id) return { status: 400, body: { error: 'Not found' } };
@@ -24,7 +24,9 @@ export const load: ServerLoad = async ({ params }) => {
   }
 
   return {
+    id: product.id,
     metadata: product.metadata,
+    productImagePath: product.productImagePath,
   };
 };
 

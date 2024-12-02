@@ -16,5 +16,6 @@ export const dataProduct = pgTable('data_product', {
   id: uuid('id').primaryKey().defaultRandom(),
   metadata: json('metadata'),
   zipPath: text('zip_path').notNull(),
+  productImagePath: text('product_image_path'),
 });
 

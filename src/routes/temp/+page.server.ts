@@ -1,12 +1,8 @@
 import { db } from '$lib/server/db';
-import { dataProduct } from '$lib/server/db/schema';
 import type { ServerLoad } from '@sveltejs/kit';
-import { eq } from 'drizzle-orm';
 
 export const load: ServerLoad = async () => {
-  const products = await db.query.dataProduct.findMany({
-    with: dataProduct.metadata,
-  });
+  const products = await db.query.dataProduct.findMany();
 
   console.log('products', products);
 
@@ -14,6 +10,7 @@ export const load: ServerLoad = async () => {
     products: products.map((product) => ({
       id: product.id,
       metadata: product.metadata,
+      productImagePath: product.productImagePath,
     })),
   };
 };
